@@ -23,22 +23,25 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.TookAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Initiative = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CharacterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ArmorClass = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Notes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HasProblems = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.IsEnemy = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ReorderInitiative = New System.Windows.Forms.Button()
-        Me.ResetTurnActions = New System.Windows.Forms.Button()
-        Me.NextEncounter = New System.Windows.Forms.Button()
+        Me.NextTurn = New System.Windows.Forms.Button()
+        Me.NewEncounter = New System.Windows.Forms.Button()
         Me.NextEncounterTooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.ExportButton = New System.Windows.Forms.Button()
         Me.ImportButton = New System.Windows.Forms.Button()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.sfd = New System.Windows.Forms.SaveFileDialog()
+        Me.TookAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Initiative = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CharacterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ArmorClass = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HealthPoints = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Notes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HasProblems = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.IsPlayer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,62 +52,11 @@ Partial Class MainForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TookAction, Me.Initiative, Me.CharacterName, Me.ArmorClass, Me.Notes, Me.HasProblems, Me.IsEnemy})
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TookAction, Me.Initiative, Me.CharacterName, Me.ArmorClass, Me.HealthPoints, Me.Notes, Me.HasProblems, Me.IsPlayer})
         Me.dgv.Location = New System.Drawing.Point(13, 12)
         Me.dgv.Name = "dgv"
         Me.dgv.Size = New System.Drawing.Size(584, 380)
         Me.dgv.TabIndex = 0
-        '
-        'TookAction
-        '
-        Me.TookAction.HeaderText = "Took Action"
-        Me.TookAction.Name = "TookAction"
-        Me.TookAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.TookAction.Width = 64
-        '
-        'Initiative
-        '
-        Me.Initiative.HeaderText = "Initiative"
-        Me.Initiative.Name = "Initiative"
-        Me.Initiative.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Initiative.Width = 52
-        '
-        'CharacterName
-        '
-        Me.CharacterName.HeaderText = "Character Name"
-        Me.CharacterName.Name = "CharacterName"
-        Me.CharacterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CharacterName.Width = 81
-        '
-        'ArmorClass
-        '
-        Me.ArmorClass.HeaderText = "Armor Class"
-        Me.ArmorClass.Name = "ArmorClass"
-        Me.ArmorClass.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ArmorClass.Width = 61
-        '
-        'Notes
-        '
-        Me.Notes.HeaderText = "Notes"
-        Me.Notes.Name = "Notes"
-        Me.Notes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Notes.Width = 41
-        '
-        'HasProblems
-        '
-        Me.HasProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.HasProblems.HeaderText = "Has Problems"
-        Me.HasProblems.Name = "HasProblems"
-        Me.HasProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.HasProblems.Width = 89
-        '
-        'IsEnemy
-        '
-        Me.IsEnemy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.IsEnemy.HeaderText = "Is Enemy"
-        Me.IsEnemy.Name = "IsEnemy"
-        Me.IsEnemy.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IsEnemy.Width = 51
         '
         'ReorderInitiative
         '
@@ -116,26 +68,26 @@ Partial Class MainForm
         Me.ReorderInitiative.Text = "Reorder Initiative"
         Me.ReorderInitiative.UseVisualStyleBackColor = True
         '
-        'ResetTurnActions
+        'NextTurn
         '
-        Me.ResetTurnActions.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.ResetTurnActions.Location = New System.Drawing.Point(13, 400)
-        Me.ResetTurnActions.Name = "ResetTurnActions"
-        Me.ResetTurnActions.Size = New System.Drawing.Size(147, 23)
-        Me.ResetTurnActions.TabIndex = 1
-        Me.ResetTurnActions.Text = "Reset Turn Actions"
-        Me.ResetTurnActions.UseVisualStyleBackColor = True
+        Me.NextTurn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.NextTurn.Location = New System.Drawing.Point(13, 400)
+        Me.NextTurn.Name = "NextTurn"
+        Me.NextTurn.Size = New System.Drawing.Size(147, 23)
+        Me.NextTurn.TabIndex = 1
+        Me.NextTurn.Text = "Next Turn"
+        Me.NextTurn.UseVisualStyleBackColor = True
         '
-        'NextEncounter
+        'NewEncounter
         '
-        Me.NextEncounter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.NextEncounter.Location = New System.Drawing.Point(450, 400)
-        Me.NextEncounter.Name = "NextEncounter"
-        Me.NextEncounter.Size = New System.Drawing.Size(147, 23)
-        Me.NextEncounter.TabIndex = 4
-        Me.NextEncounter.Text = "Next Encounter"
-        Me.NextEncounterTooltip.SetToolTip(Me.NextEncounter, "Remove all enemies and reset 'initiative', 'notes' and 'Has Problems' columns")
-        Me.NextEncounter.UseVisualStyleBackColor = True
+        Me.NewEncounter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NewEncounter.Location = New System.Drawing.Point(450, 400)
+        Me.NewEncounter.Name = "NewEncounter"
+        Me.NewEncounter.Size = New System.Drawing.Size(147, 23)
+        Me.NewEncounter.TabIndex = 4
+        Me.NewEncounter.Text = "New Encounter"
+        Me.NextEncounterTooltip.SetToolTip(Me.NewEncounter, "Remove all enemies and reset 'initiative', 'notes' and 'Has Problems' columns")
+        Me.NewEncounter.UseVisualStyleBackColor = True
         '
         'ExportButton
         '
@@ -163,6 +115,67 @@ Partial Class MainForm
         '
         Me.ofd.FileName = "ofd"
         '
+        'TookAction
+        '
+        Me.TookAction.HeaderText = "Took Action"
+        Me.TookAction.Name = "TookAction"
+        Me.TookAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.TookAction.Width = 71
+        '
+        'Initiative
+        '
+        Me.Initiative.HeaderText = "Initiative"
+        Me.Initiative.Name = "Initiative"
+        Me.Initiative.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Initiative.Width = 52
+        '
+        'CharacterName
+        '
+        Me.CharacterName.HeaderText = "Character Name"
+        Me.CharacterName.Name = "CharacterName"
+        Me.CharacterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CharacterName.Width = 81
+        '
+        'ArmorClass
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ArmorClass.DefaultCellStyle = DataGridViewCellStyle1
+        Me.ArmorClass.HeaderText = "Armor Class"
+        Me.ArmorClass.Name = "ArmorClass"
+        Me.ArmorClass.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ArmorClass.Width = 61
+        '
+        'HealthPoints
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.HealthPoints.DefaultCellStyle = DataGridViewCellStyle2
+        Me.HealthPoints.HeaderText = "Health Points"
+        Me.HealthPoints.Name = "HealthPoints"
+        Me.HealthPoints.Width = 88
+        '
+        'Notes
+        '
+        Me.Notes.HeaderText = "Notes"
+        Me.Notes.Name = "Notes"
+        Me.Notes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Notes.Width = 41
+        '
+        'HasProblems
+        '
+        Me.HasProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.HasProblems.HeaderText = "Has Problems"
+        Me.HasProblems.Name = "HasProblems"
+        Me.HasProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.HasProblems.Width = 89
+        '
+        'IsPlayer
+        '
+        Me.IsPlayer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.IsPlayer.HeaderText = "Is Player"
+        Me.IsPlayer.Name = "IsPlayer"
+        Me.IsPlayer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IsPlayer.Width = 48
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -170,9 +183,9 @@ Partial Class MainForm
         Me.ClientSize = New System.Drawing.Size(609, 463)
         Me.Controls.Add(Me.ImportButton)
         Me.Controls.Add(Me.ExportButton)
-        Me.Controls.Add(Me.NextEncounter)
+        Me.Controls.Add(Me.NewEncounter)
         Me.Controls.Add(Me.ReorderInitiative)
-        Me.Controls.Add(Me.ResetTurnActions)
+        Me.Controls.Add(Me.NextTurn)
         Me.Controls.Add(Me.dgv)
         Me.Name = "MainForm"
         Me.Text = "Encounter Initiative Tracker"
@@ -183,18 +196,19 @@ Partial Class MainForm
 
     Friend WithEvents dgv As DataGridView
     Friend WithEvents ReorderInitiative As Button
-    Friend WithEvents ResetTurnActions As Button
-    Friend WithEvents NextEncounter As Button
-    Friend WithEvents TookAction As DataGridViewTextBoxColumn
-    Friend WithEvents Initiative As DataGridViewTextBoxColumn
-    Friend WithEvents CharacterName As DataGridViewTextBoxColumn
-    Friend WithEvents ArmorClass As DataGridViewTextBoxColumn
-    Friend WithEvents Notes As DataGridViewTextBoxColumn
-    Friend WithEvents HasProblems As DataGridViewCheckBoxColumn
-    Friend WithEvents IsEnemy As DataGridViewCheckBoxColumn
+    Friend WithEvents NextTurn As Button
+    Friend WithEvents NewEncounter As Button
     Friend WithEvents NextEncounterTooltip As ToolTip
     Friend WithEvents ExportButton As Button
     Friend WithEvents ImportButton As Button
     Friend WithEvents ofd As OpenFileDialog
     Friend WithEvents sfd As SaveFileDialog
+    Friend WithEvents TookAction As DataGridViewTextBoxColumn
+    Friend WithEvents Initiative As DataGridViewTextBoxColumn
+    Friend WithEvents CharacterName As DataGridViewTextBoxColumn
+    Friend WithEvents ArmorClass As DataGridViewTextBoxColumn
+    Friend WithEvents HealthPoints As DataGridViewTextBoxColumn
+    Friend WithEvents Notes As DataGridViewTextBoxColumn
+    Friend WithEvents HasProblems As DataGridViewCheckBoxColumn
+    Friend WithEvents IsPlayer As DataGridViewCheckBoxColumn
 End Class

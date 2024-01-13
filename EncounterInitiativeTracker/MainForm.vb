@@ -8,52 +8,53 @@ Public Class MainForm
     End Sub
 
     Private Sub dgv_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv.CellClick
-        Select Case e.ColumnIndex
-            Case 0 'Took Action clicked
+        Select Case dgv.Columns(e.ColumnIndex).Name
+            Case tookAction_string 'Took Action clicked
                 If e.RowIndex >= 0 Then
-                    SetBackgroundColor(dgv.Rows(e.RowIndex), Color.LightGreen, 0, 3)
+                    SetBackgroundColor(dgv.Rows(e.RowIndex), Color.LightGreen, tookAction_string, 2)
                 End If
         End Select
     End Sub
 
     Private Sub dgv_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgv.CellEndEdit
-        Select Case e.ColumnIndex
-            Case 5 'Has Problems clicked
-                If dgv.Rows(e.RowIndex).Cells(5).Value = True Then
-                    SetBackgroundColor(dgv.Rows(e.RowIndex), Color.Yellow, 4, 5)
-                Else
-                    SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, 4, 5)
-                End If
+        Try
+            Select Case dgv.Columns(e.ColumnIndex).Name
+                Case hasProblems_string 'Has Problems clicked
+                    If dgv.Rows(e.RowIndex).Cells(hasProblems_string).Value = True Then
+                        SetBackgroundColor(dgv.Rows(e.RowIndex), Color.Yellow, notes_string, 1)
+                    Else
+                        SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, notes_string, 1)
+                    End If
 
-            Case 6 'Is Enemy clicked
-                If dgv.Rows(e.RowIndex).Cells(6).Value = True Then
-                    SetBackgroundColor(dgv.Rows(e.RowIndex), Color.LightSalmon, 6, 6)
-                Else
-                    SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, 6, 6)
-                End If
+                Case isPlayer_string 'Is Enemy clicked
+                    If dgv.Rows(e.RowIndex).Cells(isPlayer_string).Value = True Then
+                        SetBackgroundColor(dgv.Rows(e.RowIndex), Color.LightBlue, isPlayer_string, 0)
+                    Else
+                        SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, isPlayer_string, 0)
+                    End If
 
-        End Select
+            End Select
 
+        Catch ex As Exception
+
+        End Try
     End Sub
-    Private Sub ResetTurnActions_Click(sender As Object, e As EventArgs) Handles ResetTurnActions.Click
+    Private Sub NextTurn_Click(sender As Object, e As EventArgs) Handles NextTurn.Click
         ResetTurnAction()
     End Sub
-    Private Sub NextEncounter_Click(sender As Object, e As EventArgs) Handles NextEncounter.Click
+    Private Sub NextEncounter_Click(sender As Object, e As EventArgs) Handles NewEncounter.Click
         ResetTurnAction()
 
         For i As Integer = dgv.RowCount - 2 To 0 Step -1
-            If (dgv.Rows(i).Cells(6).Value <> Nothing Or dgv.Rows(i).Cells(6).Value.ToString <> "") AndAlso dgv.Rows(i).Cells(6).Value = True Then
+            If dgv.Rows(i).Cells(isPlayer_string).Value = Nothing OrElse dgv.Rows(i).Cells(isPlayer_string).Value.ToString = "" OrElse dgv.Rows(i).Cells(isPlayer_string).Value = False Then
                 dgv.Rows.RemoveAt(i)
                 Continue For
 
             Else
-                If dgv.Rows(i).Cells(5).Value <> "" AndAlso dgv.Rows(i).Cells(5).Value = True Then
-                    dgv.Rows(i).Cells(5).Value = False
-                    SetBackgroundColor(dgv.Rows(i), Nothing, 4, 5)
+                If dgv.Rows(i).Cells(hasProblems_string).Value <> Nothing OrElse dgv.Rows(i).Cells(hasProblems_string).Value = True Then
+                    dgv.Rows(i).Cells(hasProblems_string).Value = False
+                    SetBackgroundColor(dgv.Rows(i), Nothing, notes_string, 1)
                 End If
-
-                dgv.Rows(i).Cells(4).Value = ""
-
             End If
         Next
 
@@ -78,7 +79,7 @@ Public Class MainForm
                 CreateSingleXmlAttribute(armorClass_string, x, 3, newRow)
                 CreateSingleXmlAttribute(notes_string, x, 4, newRow)
                 CreateSingleXmlAttribute(hasProblems_string, x, 5, newRow)
-                CreateSingleXmlAttribute(isEnemy_string, x, 6, newRow)
+                CreateSingleXmlAttribute(isPlayer_string, x, 6, newRow)
 
                 DocRoot.AppendChild(newRow)
             Next
@@ -115,27 +116,39 @@ Public Class MainForm
         Next
 
         For i As Integer = 0 To dgv.RowCount - 2
-            If dgv.Rows(i).Cells(5).Value <> "" AndAlso dgv.Rows(i).Cells(5).Value = True Then
-                SetBackgroundColor(dgv.Rows(i), Color.Yellow, 4, 5)
+            If dgv.Rows(i).Cells(hasProblems_string).Value <> "" AndAlso dgv.Rows(i).Cells(hasProblems_string).Value = True Then
+                SetBackgroundColor(dgv.Rows(i), Color.Yellow, notes_string, 1)
             End If
 
-            If dgv.Rows(i).Cells(6).Value <> "" AndAlso dgv.Rows(i).Cells(6).Value = True Then
-                SetBackgroundColor(dgv.Rows(i), Color.LightSalmon, 6, 6)
+            If dgv.Rows(i).Cells(isPlayer_string).Value <> "" AndAlso dgv.Rows(i).Cells(isPlayer_string).Value = True Then
+                SetBackgroundColor(dgv.Rows(i), Color.LightBlue, isPlayer_string, 0)
             End If
         Next
-
-    End Sub
-
-    Private Sub dataerror() Handles dgv.DataError
 
     End Sub
 
 #Region "utilities"
-    Private Sub SetBackgroundColor(ByRef row As DataGridViewRow, color As Color, startColumnIndex As Integer, endColumnIndex As Integer)
-        For i As Integer = startColumnIndex To endColumnIndex
+    Private Sub SetBackgroundColor(ByRef row As DataGridViewRow, color As Color, startColumnName As String, colorThisManyCellsAfterward As Integer)
+
+        Dim startColumnIndex As String
+        Try
+            startColumnIndex = dgv.Columns(startColumnName).Index
+
+        Catch ex As Exception
+            MsgBox($"Error while setting background: {vbNewLine}Color column {startColumnName} does not exist")
+            Exit Sub
+
+        End Try
+
+        If startColumnIndex + colorThisManyCellsAfterward > dgv.ColumnCount - 1 Then
+            colorThisManyCellsAfterward = dgv.ColumnCount - 1 - startColumnIndex
+        End If
+
+        For i As Integer = startColumnIndex To startColumnIndex + colorThisManyCellsAfterward
             row.Cells(i).Style.BackColor = color
         Next
     End Sub
+
     Private Sub ReorderInitiative_Click(sender As Object, e As EventArgs) Handles ReorderInitiative.Click
         Dim intParser As Integer = 0
 
@@ -152,7 +165,7 @@ Public Class MainForm
     End Sub
     Private Sub ResetTurnAction()
         For i As Integer = 0 To dgv.RowCount - 1
-            If dgv.Rows(i).Cells(0).Style.BackColor = Color.LightGreen Then
+            If dgv.Rows(i).Cells(tookAction_string).Style.BackColor = Color.LightGreen Then
                 SetBackgroundColor(dgv.Rows(i), Nothing, 0, 3)
             End If
         Next
