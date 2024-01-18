@@ -1,6 +1,9 @@
 ﻿Imports System.Xml
 Public Class MainForm
     Dim Doc As XmlDocument
+    'todo
+    '1) aggiungere contatore dei turni + incremento ad ogni nuovo turno
+    '2) aggiungere bottone per generare iniziativa per enemies
 
     Private Sub Init() Handles Me.Shown
         dgv.Columns(0).ReadOnly = True
