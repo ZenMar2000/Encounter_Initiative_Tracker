@@ -169,7 +169,7 @@ Public Class MainForm
     Private Sub ResetTurnAction()
         For i As Integer = 0 To dgv.RowCount - 1
             If dgv.Rows(i).Cells(tookAction_string).Style.BackColor = Color.LightGreen Then
-                SetBackgroundColor(dgv.Rows(i), Nothing, 0, 3)
+                SetBackgroundColor(dgv.Rows(i), Nothing, tookAction_string, 2)
             End If
         Next
     End Sub
