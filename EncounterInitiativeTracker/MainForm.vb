@@ -48,7 +48,7 @@ Public Class MainForm
     Private Sub NextEncounter_Click(sender As Object, e As EventArgs) Handles NewEncounter.Click
         ResetTurnAction()
 
-        For i As Integer = dgv.RowCount - 2 To 0 Step -1
+          For i As Integer = dgv.RowCount - 2 To 0 Step -1
             If dgv.Rows(i).Cells(isPlayer_string).Value = Nothing OrElse dgv.Rows(i).Cells(isPlayer_string).Value.ToString = "" OrElse dgv.Rows(i).Cells(isPlayer_string).Value = False Then
                 dgv.Rows.RemoveAt(i)
                 Continue For
