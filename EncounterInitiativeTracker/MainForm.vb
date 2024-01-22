@@ -11,12 +11,15 @@ Public Class MainForm
     End Sub
 
     Private Sub dgv_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv.CellClick
-        Select Case dgv.Columns(e.ColumnIndex).Name
-            Case tookAction_string 'Took Action clicked
-                If e.RowIndex >= 0 Then
-                    SetBackgroundColor(dgv.Rows(e.RowIndex), Color.LightGreen, tookAction_string, 2)
-                End If
-        End Select
+        If (e.ColumnIndex >= 0) Then
+            Select Case dgv.Columns(e.ColumnIndex).Name
+                Case tookAction_string 'Took Action clicked
+                    If e.RowIndex >= 0 Then
+                        SetBackgroundColor(dgv.Rows(e.RowIndex), Color.LightGreen, tookAction_string, 2)
+                    End If
+            End Select
+        End If
+
     End Sub
 
     Private Sub dgv_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgv.CellEndEdit
@@ -48,7 +51,7 @@ Public Class MainForm
     Private Sub NextEncounter_Click(sender As Object, e As EventArgs) Handles NewEncounter.Click
         ResetTurnAction()
 
-          For i As Integer = dgv.RowCount - 2 To 0 Step -1
+        For i As Integer = dgv.RowCount - 2 To 0 Step -1
             If dgv.Rows(i).Cells(isPlayer_string).Value = Nothing OrElse dgv.Rows(i).Cells(isPlayer_string).Value.ToString = "" OrElse dgv.Rows(i).Cells(isPlayer_string).Value = False Then
                 dgv.Rows.RemoveAt(i)
                 Continue For
@@ -77,12 +80,9 @@ Public Class MainForm
             For x As Integer = 0 To dgv.RowCount - 2
                 Dim newRow As XmlNode = Doc.CreateElement(characterRow_string)
 
-                CreateSingleXmlAttribute(initiative_string, x, 1, newRow)
-                CreateSingleXmlAttribute(name_string, x, 2, newRow)
-                CreateSingleXmlAttribute(armorClass_string, x, 3, newRow)
-                CreateSingleXmlAttribute(notes_string, x, 4, newRow)
-                CreateSingleXmlAttribute(hasProblems_string, x, 5, newRow)
-                CreateSingleXmlAttribute(isPlayer_string, x, 6, newRow)
+                For y As Integer = 0 To dgv.ColumnCount - 1
+                    CreateSingleXmlAttribute("Col" & y, x, y, newRow)
+                Next
 
                 DocRoot.AppendChild(newRow)
             Next
@@ -113,17 +113,23 @@ Public Class MainForm
             index = dgv.Rows.Add()
             Dim innerIndex As Integer = 0
             For Each innernode As XmlNode In onode.ChildNodes
+
+                If TypeOf dgv.Columns(innerIndex) Is DataGridViewCheckBoxColumn Then
+                    dgv.Rows(index).Cells(innerIndex).Value = IIf(innernode.InnerText = "True", True, False)
+                Else
+                    dgv.Rows(index).Cells(innerIndex).Value = innernode.InnerText
+                End If
+
                 innerIndex += 1
-                dgv.Rows(index).Cells(innerIndex).Value = innernode.InnerText
             Next
         Next
 
         For i As Integer = 0 To dgv.RowCount - 2
-            If dgv.Rows(i).Cells(hasProblems_string).Value <> "" AndAlso dgv.Rows(i).Cells(hasProblems_string).Value = True Then
+            If dgv.Rows(i).Cells(hasProblems_string).Value.ToString = "True" Then
                 SetBackgroundColor(dgv.Rows(i), Color.Yellow, notes_string, 1)
             End If
 
-            If dgv.Rows(i).Cells(isPlayer_string).Value <> "" AndAlso dgv.Rows(i).Cells(isPlayer_string).Value = True Then
+            If dgv.Rows(i).Cells(isPlayer_string).Value.ToString = "True" Then
                 SetBackgroundColor(dgv.Rows(i), Color.LightBlue, isPlayer_string, 0)
             End If
         Next
