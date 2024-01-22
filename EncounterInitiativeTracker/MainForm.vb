@@ -1,6 +1,9 @@
 ﻿Imports System.Xml
 Public Class MainForm
     Dim Doc As XmlDocument
+    'todo
+    '1) aggiungere contatore dei turni + incremento ad ogni nuovo turno
+    '2) aggiungere bottone per generare iniziativa per enemies
 
     Private Sub Init() Handles Me.Shown
         dgv.Columns(0).ReadOnly = True
@@ -45,7 +48,7 @@ Public Class MainForm
     Private Sub NextEncounter_Click(sender As Object, e As EventArgs) Handles NewEncounter.Click
         ResetTurnAction()
 
-        For i As Integer = dgv.RowCount - 2 To 0 Step -1
+          For i As Integer = dgv.RowCount - 2 To 0 Step -1
             If dgv.Rows(i).Cells(isPlayer_string).Value = Nothing OrElse dgv.Rows(i).Cells(isPlayer_string).Value.ToString = "" OrElse dgv.Rows(i).Cells(isPlayer_string).Value = False Then
                 dgv.Rows.RemoveAt(i)
                 Continue For
@@ -166,7 +169,7 @@ Public Class MainForm
     Private Sub ResetTurnAction()
         For i As Integer = 0 To dgv.RowCount - 1
             If dgv.Rows(i).Cells(tookAction_string).Style.BackColor = Color.LightGreen Then
-                SetBackgroundColor(dgv.Rows(i), Nothing, 0, 3)
+                SetBackgroundColor(dgv.Rows(i), Nothing, tookAction_string, 2)
             End If
         Next
     End Sub
