@@ -26,7 +26,7 @@ Public Class MainForm
                         SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, notes_string, 1)
                     End If
 
-                Case isPlayer_string 'Is Enemy clicked
+                Case isPlayer_string 'Is player clicked
                     If dgv.Rows(e.RowIndex).Cells(isPlayer_string).Value = True Then
                         SetBackgroundColor(dgv.Rows(e.RowIndex), Color.LightBlue, isPlayer_string, 0)
                     Else
