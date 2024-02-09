@@ -26,14 +26,6 @@ Partial Class MainForm
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.ReorderInitiative = New System.Windows.Forms.Button()
-        Me.NextTurn = New System.Windows.Forms.Button()
-        Me.NewEncounter = New System.Windows.Forms.Button()
-        Me.NextEncounterTooltip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ExportButton = New System.Windows.Forms.Button()
-        Me.ImportButton = New System.Windows.Forms.Button()
-        Me.ofd = New System.Windows.Forms.OpenFileDialog()
-        Me.sfd = New System.Windows.Forms.SaveFileDialog()
         Me.TookAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Initiative = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CharacterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -42,6 +34,15 @@ Partial Class MainForm
         Me.Notes = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HasProblems = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.IsPlayer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ReorderInitiative = New System.Windows.Forms.Button()
+        Me.NextTurn = New System.Windows.Forms.Button()
+        Me.NewEncounter = New System.Windows.Forms.Button()
+        Me.NextEncounterTooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ExportButton = New System.Windows.Forms.Button()
+        Me.ImportButton = New System.Windows.Forms.Button()
+        Me.ofd = New System.Windows.Forms.OpenFileDialog()
+        Me.sfd = New System.Windows.Forms.SaveFileDialog()
+        Me.RollInitiativeButton = New System.Windows.Forms.Button()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -57,6 +58,67 @@ Partial Class MainForm
         Me.dgv.Name = "dgv"
         Me.dgv.Size = New System.Drawing.Size(584, 380)
         Me.dgv.TabIndex = 0
+        '
+        'TookAction
+        '
+        Me.TookAction.HeaderText = "Took Action"
+        Me.TookAction.Name = "TookAction"
+        Me.TookAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.TookAction.Width = 64
+        '
+        'Initiative
+        '
+        Me.Initiative.HeaderText = "Initiative"
+        Me.Initiative.Name = "Initiative"
+        Me.Initiative.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Initiative.Width = 52
+        '
+        'CharacterName
+        '
+        Me.CharacterName.HeaderText = "Character Name"
+        Me.CharacterName.Name = "CharacterName"
+        Me.CharacterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CharacterName.Width = 81
+        '
+        'ArmorClass
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ArmorClass.DefaultCellStyle = DataGridViewCellStyle1
+        Me.ArmorClass.HeaderText = "Armor Class"
+        Me.ArmorClass.Name = "ArmorClass"
+        Me.ArmorClass.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ArmorClass.Width = 61
+        '
+        'HealthPoints
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.HealthPoints.DefaultCellStyle = DataGridViewCellStyle2
+        Me.HealthPoints.HeaderText = "Health Points"
+        Me.HealthPoints.Name = "HealthPoints"
+        Me.HealthPoints.Width = 88
+        '
+        'Notes
+        '
+        Me.Notes.HeaderText = "Notes"
+        Me.Notes.Name = "Notes"
+        Me.Notes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Notes.Width = 41
+        '
+        'HasProblems
+        '
+        Me.HasProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.HasProblems.HeaderText = "Has Problems"
+        Me.HasProblems.Name = "HasProblems"
+        Me.HasProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.HasProblems.Width = 89
+        '
+        'IsPlayer
+        '
+        Me.IsPlayer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.IsPlayer.HeaderText = "Is Player"
+        Me.IsPlayer.Name = "IsPlayer"
+        Me.IsPlayer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IsPlayer.Width = 48
         '
         'ReorderInitiative
         '
@@ -115,72 +177,22 @@ Partial Class MainForm
         '
         Me.ofd.FileName = "ofd"
         '
-        'TookAction
+        'RollInitiativeButton
         '
-        Me.TookAction.HeaderText = "Took Action"
-        Me.TookAction.Name = "TookAction"
-        Me.TookAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.TookAction.Width = 71
-        '
-        'Initiative
-        '
-        Me.Initiative.HeaderText = "Initiative"
-        Me.Initiative.Name = "Initiative"
-        Me.Initiative.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Initiative.Width = 52
-        '
-        'CharacterName
-        '
-        Me.CharacterName.HeaderText = "Character Name"
-        Me.CharacterName.Name = "CharacterName"
-        Me.CharacterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CharacterName.Width = 81
-        '
-        'ArmorClass
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ArmorClass.DefaultCellStyle = DataGridViewCellStyle1
-        Me.ArmorClass.HeaderText = "Armor Class"
-        Me.ArmorClass.Name = "ArmorClass"
-        Me.ArmorClass.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ArmorClass.Width = 61
-        '
-        'HealthPoints
-        '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.HealthPoints.DefaultCellStyle = DataGridViewCellStyle2
-        Me.HealthPoints.HeaderText = "Health Points"
-        Me.HealthPoints.Name = "HealthPoints"
-        Me.HealthPoints.Width = 88
-        '
-        'Notes
-        '
-        Me.Notes.HeaderText = "Notes"
-        Me.Notes.Name = "Notes"
-        Me.Notes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Notes.Width = 41
-        '
-        'HasProblems
-        '
-        Me.HasProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.HasProblems.HeaderText = "Has Problems"
-        Me.HasProblems.Name = "HasProblems"
-        Me.HasProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.HasProblems.Width = 89
-        '
-        'IsPlayer
-        '
-        Me.IsPlayer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.IsPlayer.HeaderText = "Is Player"
-        Me.IsPlayer.Name = "IsPlayer"
-        Me.IsPlayer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IsPlayer.Width = 48
+        Me.RollInitiativeButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RollInitiativeButton.Location = New System.Drawing.Point(365, 400)
+        Me.RollInitiativeButton.Name = "RollInitiativeButton"
+        Me.RollInitiativeButton.Size = New System.Drawing.Size(79, 23)
+        Me.RollInitiativeButton.TabIndex = 7
+        Me.RollInitiativeButton.Text = "Roll Initiative"
+        Me.RollInitiativeButton.UseVisualStyleBackColor = True
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(609, 463)
+        Me.Controls.Add(Me.RollInitiativeButton)
         Me.Controls.Add(Me.ImportButton)
         Me.Controls.Add(Me.ExportButton)
         Me.Controls.Add(Me.NewEncounter)
@@ -211,4 +223,5 @@ Partial Class MainForm
     Friend WithEvents Notes As DataGridViewTextBoxColumn
     Friend WithEvents HasProblems As DataGridViewCheckBoxColumn
     Friend WithEvents IsPlayer As DataGridViewCheckBoxColumn
+    Friend WithEvents RollInitiativeButton As Button
 End Class

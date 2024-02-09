@@ -185,6 +185,18 @@ Public Class MainForm
         xmlRowNode.AppendChild(tempNode)
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles RollInitiativeButton.Click
+        Dim rand As New Random()
+        Dim row As DataGridViewRow
+        For i As Integer = 0 To dgv.Rows.Count - 2
+            row = dgv.Rows(i)
+            If IsDBNull(row.Cells("IsPlayer").Value) OrElse row.Cells("IsPlayer").Value Is Nothing OrElse row.Cells("IsPlayer").Value = False Then
+                row.Cells("Initiative").Value = rand.Next(1, 20)
+            End If
+
+        Next
+    End Sub
+
 #End Region
 
 End Class
