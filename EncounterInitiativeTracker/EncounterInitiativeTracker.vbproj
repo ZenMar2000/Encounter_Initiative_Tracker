@@ -58,6 +58,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -73,6 +74,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InitiativeClearQuestionForm.Designer.vb">
+      <DependentUpon>InitiativeClearQuestionForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InitiativeClearQuestionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +105,9 @@
     <Compile Include="Utilities.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="InitiativeClearQuestionForm.resx">
+      <DependentUpon>InitiativeClearQuestionForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>

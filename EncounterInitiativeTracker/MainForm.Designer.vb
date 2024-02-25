@@ -43,6 +43,7 @@ Partial Class MainForm
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.sfd = New System.Windows.Forms.SaveFileDialog()
         Me.RollInitiativeButton = New System.Windows.Forms.Button()
+        Me.ClearInitiativeButton = New System.Windows.Forms.Button()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -180,18 +181,29 @@ Partial Class MainForm
         'RollInitiativeButton
         '
         Me.RollInitiativeButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RollInitiativeButton.Location = New System.Drawing.Point(365, 400)
+        Me.RollInitiativeButton.Location = New System.Drawing.Point(356, 400)
         Me.RollInitiativeButton.Name = "RollInitiativeButton"
-        Me.RollInitiativeButton.Size = New System.Drawing.Size(79, 23)
+        Me.RollInitiativeButton.Size = New System.Drawing.Size(88, 23)
         Me.RollInitiativeButton.TabIndex = 7
         Me.RollInitiativeButton.Text = "Roll Initiative"
         Me.RollInitiativeButton.UseVisualStyleBackColor = True
+        '
+        'ClearInitiativeButton
+        '
+        Me.ClearInitiativeButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ClearInitiativeButton.Location = New System.Drawing.Point(356, 429)
+        Me.ClearInitiativeButton.Name = "ClearInitiativeButton"
+        Me.ClearInitiativeButton.Size = New System.Drawing.Size(88, 23)
+        Me.ClearInitiativeButton.TabIndex = 8
+        Me.ClearInitiativeButton.Text = "Clear Initiative"
+        Me.ClearInitiativeButton.UseVisualStyleBackColor = True
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(609, 463)
+        Me.Controls.Add(Me.ClearInitiativeButton)
         Me.Controls.Add(Me.RollInitiativeButton)
         Me.Controls.Add(Me.ImportButton)
         Me.Controls.Add(Me.ExportButton)
@@ -224,4 +236,5 @@ Partial Class MainForm
     Friend WithEvents HasProblems As DataGridViewCheckBoxColumn
     Friend WithEvents IsPlayer As DataGridViewCheckBoxColumn
     Friend WithEvents RollInitiativeButton As Button
+    Friend WithEvents ClearInitiativeButton As Button
 End Class

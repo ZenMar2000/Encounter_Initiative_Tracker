@@ -27,6 +27,7 @@ Public Class MainForm
             Select Case dgv.Columns(e.ColumnIndex).Name
                 Case hasProblems_string 'Has Problems clicked
                     If dgv.Rows(e.RowIndex).Cells(hasProblems_string).Value = True Then
+                        SetBackgroundColor(dgv.Rows(e.RowIndex), Color.Yellow, tookAction_string, 3)
                         SetBackgroundColor(dgv.Rows(e.RowIndex), Color.Yellow, notes_string, 1)
                     Else
                         SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, notes_string, 1)
@@ -163,19 +164,25 @@ Public Class MainForm
 
         For Each row As DataGridViewRow In dgv.Rows
 
-            If row.Cells("Initiative").Value <> Nothing Then
-                Integer.TryParse(row.Cells("Initiative").Value.ToString(), intParser)
-                row.Cells("Initiative").Value = intParser
+            If row.Cells(initiative_string).Value <> Nothing Then
+                Integer.TryParse(row.Cells(initiative_string).Value.ToString(), intParser)
+                row.Cells(initiative_string).Value = intParser
             End If
 
         Next
 
-        dgv.Sort(dgv.Columns("Initiative"), System.ComponentModel.ListSortDirection.Descending)
+        dgv.Sort(dgv.Columns(initiative_string), System.ComponentModel.ListSortDirection.Descending)
     End Sub
     Private Sub ResetTurnAction()
         For i As Integer = 0 To dgv.RowCount - 1
             If dgv.Rows(i).Cells(tookAction_string).Style.BackColor = Color.LightGreen Then
-                SetBackgroundColor(dgv.Rows(i), Nothing, tookAction_string, 2)
+                If dgv.Rows(i).Cells(hasProblems_string).Style.BackColor = Color.Yellow Then
+                    SetBackgroundColor(dgv.Rows(i), Color.Yellow, tookAction_string, 2)
+
+                Else
+                    SetBackgroundColor(dgv.Rows(i), Nothing, tookAction_string, 2)
+
+                End If
             End If
         Next
     End Sub
@@ -185,17 +192,38 @@ Public Class MainForm
         xmlRowNode.AppendChild(tempNode)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles RollInitiativeButton.Click
+    Private Sub RollInitiativeButton_Click(sender As Object, e As EventArgs) Handles RollInitiativeButton.Click
         Dim rand As New Random()
         Dim row As DataGridViewRow
         For i As Integer = 0 To dgv.Rows.Count - 2
             row = dgv.Rows(i)
-            If IsDBNull(row.Cells("IsPlayer").Value) OrElse row.Cells("IsPlayer").Value Is Nothing OrElse row.Cells("IsPlayer").Value = False Then
-                row.Cells("Initiative").Value = rand.Next(1, 20)
+            If CheckIfEmptyCell(row.Cells(initiative_string).Value) = True Then
+                row.Cells(initiative_string).Value = rand.Next(1, 20)
             End If
-
         Next
     End Sub
+
+    Private Sub ClearInitiativeButton_Click(sender As Object, e As EventArgs) Handles ClearInitiativeButton.Click
+
+    End Sub
+
+    Private Function CheckIfEmptyCell(value As String) As Boolean
+        If IsNumeric(value) Then
+            Dim myInt As Integer = CInt(value)
+            Return CInt(value) > 20 Or myInt <= 0
+
+        End If
+        Return True
+
+    End Function
+
+    Private Function CheckIfEmptyCell(value) As Boolean
+        If value Is Nothing Then
+            Return True
+        Else
+            Return CheckIfEmptyCell(value.ToString)
+        End If
+    End Function
 
 #End Region
 
