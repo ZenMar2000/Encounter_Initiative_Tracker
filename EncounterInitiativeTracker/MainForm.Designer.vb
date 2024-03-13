@@ -23,8 +23,8 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv = New System.Windows.Forms.DataGridView()
         Me.TookAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Initiative = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,6 +44,8 @@ Partial Class MainForm
         Me.sfd = New System.Windows.Forms.SaveFileDialog()
         Me.RollInitiativeButton = New System.Windows.Forms.Button()
         Me.ClearInitiativeButton = New System.Windows.Forms.Button()
+        Me.TurnCounterTextBox = New System.Windows.Forms.TextBox()
+        Me.TurnCounterLabel = New System.Windows.Forms.Label()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,9 +57,9 @@ Partial Class MainForm
         Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TookAction, Me.Initiative, Me.CharacterName, Me.ArmorClass, Me.HealthPoints, Me.Notes, Me.HasProblems, Me.IsPlayer})
-        Me.dgv.Location = New System.Drawing.Point(13, 12)
+        Me.dgv.Location = New System.Drawing.Point(13, 30)
         Me.dgv.Name = "dgv"
-        Me.dgv.Size = New System.Drawing.Size(584, 380)
+        Me.dgv.Size = New System.Drawing.Size(584, 362)
         Me.dgv.TabIndex = 0
         '
         'TookAction
@@ -83,8 +85,8 @@ Partial Class MainForm
         '
         'ArmorClass
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ArmorClass.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ArmorClass.DefaultCellStyle = DataGridViewCellStyle3
         Me.ArmorClass.HeaderText = "Armor Class"
         Me.ArmorClass.Name = "ArmorClass"
         Me.ArmorClass.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -92,8 +94,8 @@ Partial Class MainForm
         '
         'HealthPoints
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.HealthPoints.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.HealthPoints.DefaultCellStyle = DataGridViewCellStyle4
         Me.HealthPoints.HeaderText = "Health Points"
         Me.HealthPoints.Name = "HealthPoints"
         Me.HealthPoints.Width = 88
@@ -198,11 +200,31 @@ Partial Class MainForm
         Me.ClearInitiativeButton.Text = "Clear Initiative"
         Me.ClearInitiativeButton.UseVisualStyleBackColor = True
         '
+        'TurnCounterTextBox
+        '
+        Me.TurnCounterTextBox.Location = New System.Drawing.Point(87, 4)
+        Me.TurnCounterTextBox.Name = "TurnCounterTextBox"
+        Me.TurnCounterTextBox.Size = New System.Drawing.Size(50, 20)
+        Me.TurnCounterTextBox.TabIndex = 9
+        Me.TurnCounterTextBox.Text = "1"
+        Me.TurnCounterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TurnCounterLabel
+        '
+        Me.TurnCounterLabel.AutoSize = True
+        Me.TurnCounterLabel.Location = New System.Drawing.Point(12, 7)
+        Me.TurnCounterLabel.Name = "TurnCounterLabel"
+        Me.TurnCounterLabel.Size = New System.Drawing.Size(69, 13)
+        Me.TurnCounterLabel.TabIndex = 10
+        Me.TurnCounterLabel.Text = "Turn Counter"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(609, 463)
+        Me.Controls.Add(Me.TurnCounterLabel)
+        Me.Controls.Add(Me.TurnCounterTextBox)
         Me.Controls.Add(Me.ClearInitiativeButton)
         Me.Controls.Add(Me.RollInitiativeButton)
         Me.Controls.Add(Me.ImportButton)
@@ -215,6 +237,7 @@ Partial Class MainForm
         Me.Text = "Encounter Initiative Tracker"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -237,4 +260,6 @@ Partial Class MainForm
     Friend WithEvents IsPlayer As DataGridViewCheckBoxColumn
     Friend WithEvents RollInitiativeButton As Button
     Friend WithEvents ClearInitiativeButton As Button
+    Friend WithEvents TurnCounterTextBox As TextBox
+    Friend WithEvents TurnCounterLabel As Label
 End Class

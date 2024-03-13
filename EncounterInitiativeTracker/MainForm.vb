@@ -47,9 +47,12 @@ Public Class MainForm
         End Try
     End Sub
     Private Sub NextTurn_Click(sender As Object, e As EventArgs) Handles NextTurn.Click
+        TurnCounterTextBox.Text = CInt(TurnCounterTextBox.Text) + 1
         ResetTurnAction()
     End Sub
     Private Sub NextEncounter_Click(sender As Object, e As EventArgs) Handles NewEncounter.Click
+        TurnCounterTextBox.Text = 1
+
         ResetTurnAction()
 
         For i As Integer = dgv.RowCount - 2 To 0 Step -1
@@ -204,7 +207,17 @@ Public Class MainForm
     End Sub
 
     Private Sub ClearInitiativeButton_Click(sender As Object, e As EventArgs) Handles ClearInitiativeButton.Click
+        Dim questionForm As New InitiativeClearQuestionForm
+        questionForm.ShowDialog()
 
+        Select Case questionForm.Answer
+            Case InitiativeClearQuestionForm.Response.ALL
+
+            Case InitiativeClearQuestionForm.Response.ENEMY
+
+        End Select
+
+        questionForm.Dispose()
     End Sub
 
     Private Function CheckIfEmptyCell(value As String) As Boolean
@@ -224,6 +237,14 @@ Public Class MainForm
             Return CheckIfEmptyCell(value.ToString)
         End If
     End Function
+
+    Private Sub TurnCounterTextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TurnCounterTextBox.KeyPress
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
 
 #End Region
 
