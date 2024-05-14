@@ -209,14 +209,31 @@ Public Class MainForm
 
     Private Sub ClearInitiativeButton_Click(sender As Object, e As EventArgs) Handles ClearInitiativeButton.Click
         Dim questionForm As New InitiativeClearQuestionForm
+        Dim row As DataGridViewRow
+        questionForm.StartPosition() = FormStartPosition.CenterParent
         questionForm.ShowDialog()
 
-        Select Case questionForm.Answer
-            Case InitiativeClearQuestionForm.Response.ALL
+        Dim clearAllInitiative As Boolean = IIf(questionForm.Answer = InitiativeClearQuestionForm.Response.ALL, True, False)
 
-            Case InitiativeClearQuestionForm.Response.ENEMY
+        For i As Integer = 0 To dgv.Rows.Count - 2
+            row = dgv.Rows(i)
 
-        End Select
+            If clearAllInitiative Then
+                row.Cells(initiative_string).Value = ""
+
+            ElseIf CheckIfEmptyCell(row.Cells(isPlayer_string).Value) = False OrElse row.Cells(isPlayer_string).Value = False Then
+                row.Cells(initiative_string).Value = ""
+
+            End If
+
+        Next
+
+        'Select Case questionForm.Answer
+        '    Case InitiativeClearQuestionForm.Response.ALL
+
+        '    Case InitiativeClearQuestionForm.Response.ENEMY
+
+        'End Select
 
         questionForm.Dispose()
     End Sub
