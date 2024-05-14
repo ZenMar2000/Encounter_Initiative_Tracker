@@ -30,6 +30,7 @@ Public Class MainForm
                         SetBackgroundColor(dgv.Rows(e.RowIndex), Color.Yellow, tookAction_string, 3)
                         SetBackgroundColor(dgv.Rows(e.RowIndex), Color.Yellow, notes_string, 1)
                     Else
+                        SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, tookAction_string, 3)
                         SetBackgroundColor(dgv.Rows(e.RowIndex), Nothing, notes_string, 1)
                     End If
 

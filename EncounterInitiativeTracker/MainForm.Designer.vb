@@ -23,17 +23,10 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.TookAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Initiative = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CharacterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ArmorClass = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HealthPoints = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Notes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HasProblems = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.IsPlayer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ReorderInitiative = New System.Windows.Forms.Button()
         Me.NextTurn = New System.Windows.Forms.Button()
         Me.NewEncounter = New System.Windows.Forms.Button()
@@ -46,6 +39,15 @@ Partial Class MainForm
         Me.ClearInitiativeButton = New System.Windows.Forms.Button()
         Me.TurnCounterTextBox = New System.Windows.Forms.TextBox()
         Me.TurnCounterLabel = New System.Windows.Forms.Label()
+        Me.TookAction = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Initiative = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CharacterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ArmorClass = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HealthPoints = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Notes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HasProblems = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.IsPlayer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.PassivePerception = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,72 +58,11 @@ Partial Class MainForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TookAction, Me.Initiative, Me.CharacterName, Me.ArmorClass, Me.HealthPoints, Me.Notes, Me.HasProblems, Me.IsPlayer})
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TookAction, Me.Initiative, Me.CharacterName, Me.ArmorClass, Me.HealthPoints, Me.Notes, Me.HasProblems, Me.IsPlayer, Me.PassivePerception})
         Me.dgv.Location = New System.Drawing.Point(13, 30)
         Me.dgv.Name = "dgv"
-        Me.dgv.Size = New System.Drawing.Size(584, 362)
+        Me.dgv.Size = New System.Drawing.Size(649, 362)
         Me.dgv.TabIndex = 0
-        '
-        'TookAction
-        '
-        Me.TookAction.HeaderText = "Took Action"
-        Me.TookAction.Name = "TookAction"
-        Me.TookAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.TookAction.Width = 64
-        '
-        'Initiative
-        '
-        Me.Initiative.HeaderText = "Initiative"
-        Me.Initiative.Name = "Initiative"
-        Me.Initiative.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Initiative.Width = 52
-        '
-        'CharacterName
-        '
-        Me.CharacterName.HeaderText = "Character Name"
-        Me.CharacterName.Name = "CharacterName"
-        Me.CharacterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CharacterName.Width = 81
-        '
-        'ArmorClass
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ArmorClass.DefaultCellStyle = DataGridViewCellStyle3
-        Me.ArmorClass.HeaderText = "Armor Class"
-        Me.ArmorClass.Name = "ArmorClass"
-        Me.ArmorClass.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ArmorClass.Width = 61
-        '
-        'HealthPoints
-        '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.HealthPoints.DefaultCellStyle = DataGridViewCellStyle4
-        Me.HealthPoints.HeaderText = "Health Points"
-        Me.HealthPoints.Name = "HealthPoints"
-        Me.HealthPoints.Width = 88
-        '
-        'Notes
-        '
-        Me.Notes.HeaderText = "Notes"
-        Me.Notes.Name = "Notes"
-        Me.Notes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Notes.Width = 41
-        '
-        'HasProblems
-        '
-        Me.HasProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.HasProblems.HeaderText = "Has Problems"
-        Me.HasProblems.Name = "HasProblems"
-        Me.HasProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.HasProblems.Width = 89
-        '
-        'IsPlayer
-        '
-        Me.IsPlayer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.IsPlayer.HeaderText = "Is Player"
-        Me.IsPlayer.Name = "IsPlayer"
-        Me.IsPlayer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IsPlayer.Width = 48
         '
         'ReorderInitiative
         '
@@ -146,7 +87,7 @@ Partial Class MainForm
         'NewEncounter
         '
         Me.NewEncounter.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.NewEncounter.Location = New System.Drawing.Point(450, 400)
+        Me.NewEncounter.Location = New System.Drawing.Point(515, 400)
         Me.NewEncounter.Name = "NewEncounter"
         Me.NewEncounter.Size = New System.Drawing.Size(147, 23)
         Me.NewEncounter.TabIndex = 4
@@ -157,7 +98,7 @@ Partial Class MainForm
         'ExportButton
         '
         Me.ExportButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ExportButton.Location = New System.Drawing.Point(450, 429)
+        Me.ExportButton.Location = New System.Drawing.Point(515, 429)
         Me.ExportButton.Name = "ExportButton"
         Me.ExportButton.Size = New System.Drawing.Size(72, 23)
         Me.ExportButton.TabIndex = 5
@@ -168,7 +109,7 @@ Partial Class MainForm
         'ImportButton
         '
         Me.ImportButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ImportButton.Location = New System.Drawing.Point(525, 428)
+        Me.ImportButton.Location = New System.Drawing.Point(590, 428)
         Me.ImportButton.Name = "ImportButton"
         Me.ImportButton.Size = New System.Drawing.Size(72, 23)
         Me.ImportButton.TabIndex = 6
@@ -183,7 +124,7 @@ Partial Class MainForm
         'RollInitiativeButton
         '
         Me.RollInitiativeButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RollInitiativeButton.Location = New System.Drawing.Point(356, 400)
+        Me.RollInitiativeButton.Location = New System.Drawing.Point(421, 400)
         Me.RollInitiativeButton.Name = "RollInitiativeButton"
         Me.RollInitiativeButton.Size = New System.Drawing.Size(88, 23)
         Me.RollInitiativeButton.TabIndex = 7
@@ -193,7 +134,7 @@ Partial Class MainForm
         'ClearInitiativeButton
         '
         Me.ClearInitiativeButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ClearInitiativeButton.Location = New System.Drawing.Point(356, 429)
+        Me.ClearInitiativeButton.Location = New System.Drawing.Point(421, 429)
         Me.ClearInitiativeButton.Name = "ClearInitiativeButton"
         Me.ClearInitiativeButton.Size = New System.Drawing.Size(88, 23)
         Me.ClearInitiativeButton.TabIndex = 8
@@ -218,11 +159,83 @@ Partial Class MainForm
         Me.TurnCounterLabel.TabIndex = 10
         Me.TurnCounterLabel.Text = "Turn Counter"
         '
+        'TookAction
+        '
+        Me.TookAction.HeaderText = "Took Action"
+        Me.TookAction.Name = "TookAction"
+        Me.TookAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.TookAction.Width = 71
+        '
+        'Initiative
+        '
+        Me.Initiative.HeaderText = "Initiative"
+        Me.Initiative.Name = "Initiative"
+        Me.Initiative.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Initiative.Width = 52
+        '
+        'CharacterName
+        '
+        Me.CharacterName.HeaderText = "Character Name"
+        Me.CharacterName.Name = "CharacterName"
+        Me.CharacterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CharacterName.Width = 81
+        '
+        'ArmorClass
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ArmorClass.DefaultCellStyle = DataGridViewCellStyle1
+        Me.ArmorClass.HeaderText = "Armor Class"
+        Me.ArmorClass.Name = "ArmorClass"
+        Me.ArmorClass.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ArmorClass.Width = 61
+        '
+        'HealthPoints
+        '
+        Me.HealthPoints.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.HealthPoints.DefaultCellStyle = DataGridViewCellStyle2
+        Me.HealthPoints.HeaderText = "Health Points"
+        Me.HealthPoints.Name = "HealthPoints"
+        Me.HealthPoints.Width = 88
+        '
+        'Notes
+        '
+        Me.Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Notes.HeaderText = "Notes"
+        Me.Notes.Name = "Notes"
+        Me.Notes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Notes.Width = 41
+        '
+        'HasProblems
+        '
+        Me.HasProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.HasProblems.HeaderText = "Has Problems"
+        Me.HasProblems.Name = "HasProblems"
+        Me.HasProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.HasProblems.Width = 89
+        '
+        'IsPlayer
+        '
+        Me.IsPlayer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.IsPlayer.HeaderText = "Is Player"
+        Me.IsPlayer.Name = "IsPlayer"
+        Me.IsPlayer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IsPlayer.Width = 48
+        '
+        'PassivePerception
+        '
+        Me.PassivePerception.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.PassivePerception.DefaultCellStyle = DataGridViewCellStyle3
+        Me.PassivePerception.HeaderText = "Passive Perception"
+        Me.PassivePerception.Name = "PassivePerception"
+        Me.PassivePerception.Width = 75
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(609, 463)
+        Me.ClientSize = New System.Drawing.Size(674, 463)
         Me.Controls.Add(Me.TurnCounterLabel)
         Me.Controls.Add(Me.TurnCounterTextBox)
         Me.Controls.Add(Me.ClearInitiativeButton)
@@ -250,6 +263,10 @@ Partial Class MainForm
     Friend WithEvents ImportButton As Button
     Friend WithEvents ofd As OpenFileDialog
     Friend WithEvents sfd As SaveFileDialog
+    Friend WithEvents RollInitiativeButton As Button
+    Friend WithEvents ClearInitiativeButton As Button
+    Friend WithEvents TurnCounterTextBox As TextBox
+    Friend WithEvents TurnCounterLabel As Label
     Friend WithEvents TookAction As DataGridViewTextBoxColumn
     Friend WithEvents Initiative As DataGridViewTextBoxColumn
     Friend WithEvents CharacterName As DataGridViewTextBoxColumn
@@ -258,8 +275,5 @@ Partial Class MainForm
     Friend WithEvents Notes As DataGridViewTextBoxColumn
     Friend WithEvents HasProblems As DataGridViewCheckBoxColumn
     Friend WithEvents IsPlayer As DataGridViewCheckBoxColumn
-    Friend WithEvents RollInitiativeButton As Button
-    Friend WithEvents ClearInitiativeButton As Button
-    Friend WithEvents TurnCounterTextBox As TextBox
-    Friend WithEvents TurnCounterLabel As Label
+    Friend WithEvents PassivePerception As DataGridViewTextBoxColumn
 End Class

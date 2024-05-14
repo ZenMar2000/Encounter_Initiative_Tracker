@@ -9,9 +9,6 @@
     Public notes_string As String = "Notes"
     Public hasProblems_string As String = "HasProblems"
     Public isPlayer_string As String = "IsPlayer"
-
-
-
-
+    Public passivePerception_string As String = "PassivePerception"
 
 End Module
